@@ -35,3 +35,5 @@ func (tree *BST) Insert(z *Node) (*Node){
 
 	return z
 }
+
+
