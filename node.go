@@ -2,11 +2,11 @@ package bst
 
 type Node struct {
 	Value int;
-	Left, Right *Node;
+	Parent, Left, Right *Node;
 }
 
-func NewNode(value int) Node {
-	return Node {
+func NewNode(value int) (*Node, error) {
+	return &Node {
 		Value: value,
-	}
+	}, nil
 }
