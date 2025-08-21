@@ -5,54 +5,9 @@ import (
 	"testing"
 )
 
-func TestBSTInsertRoot(t *testing.T) {
-	tree, err := NewBST()
-	if err != nil {
-		t.Errorf("NewBST failed to create root")
-		return
-	}
-
-	node, err := NewNode(2)
-	if err != nil {
-		t.Errorf("NewNode failed to create node")
-		return 
-	}
-
-	if got:=tree.Insert(node); tree.Root.Value!=got.Value {
-		t.Errorf("Insert operation failed to add node at root")
-	}
-}
-
-func TestBSTInsertInner(t *testing.T) {
-	tree, err := NewBST()
-	if err != nil {
-		t.Errorf("NewBST failed to create root")
-		return
-	}
-
-	var nodes = []int{20, 15, 10, 9, 25, 21, 11}
-
-	for _, n := range nodes {
-		node, err := NewNode(n)
-		if err != nil {
-			t.Errorf("NewNode failed to create node")
-			return 
-		}
-		tree.Insert(node)
-	}
-}
-
 func TestBSTInorder(t *testing.T) {
-	tree, err := NewBST()
-	if err != nil {
-		t.Errorf("NewBST failed to create root")
-		return
-	}
-	var nodes = []int{20, 15, 10, 9, 25, 21, 11}
-	for _, n := range nodes {
-		node, _ := NewNode(n)
-		tree.Insert(node)
-	}
+	tree := NewBST()
+	tree.InsertAll([]int{20, 15, 10, 9, 25, 21, 11})
 
 	got := make([]int, 0, 7)
 	got = tree.InOrder(got)
@@ -63,16 +18,9 @@ func TestBSTInorder(t *testing.T) {
 }
 
 func TestBSTPreOrder(t *testing.T) {
-	tree, err := NewBST()
-	if err != nil {
-		t.Errorf("NewBST failed to create root")
-		return
-	}
-	var nodes = []int{20, 15, 10, 9, 25, 21, 11}
-	for _, n := range nodes {
-		node, _ := NewNode(n)
-		tree.Insert(node)
-	}
+	tree := NewBST()
+	tree.InsertAll([]int{20, 15, 10, 9, 25, 21, 11})
+
 
 	got := make([]int, 0, 7)
 	got = tree.PreOrder(got)
@@ -83,16 +31,9 @@ func TestBSTPreOrder(t *testing.T) {
 }
 
 func TestBSTPostOrder(t *testing.T) {
-	tree, err := NewBST()
-	if err != nil {
-		t.Errorf("NewBST failed to create root")
-		return
-	}
-	var nodes = []int{20, 15, 10, 9, 25, 21, 11}
-	for _, n := range nodes {
-		node, _ := NewNode(n)
-		tree.Insert(node)
-	}
+	tree := NewBST()
+	tree.InsertAll([]int{20, 15, 10, 9, 25, 21, 11})
+
 
 	got := make([]int, 0, 7)
 	got = tree.PostOrder(got)
@@ -104,16 +45,8 @@ func TestBSTPostOrder(t *testing.T) {
 
 
 func TestBSTSearch(t *testing.T) {
-	tree, err := NewBST()
-	if err != nil {
-		t.Errorf("NewBST failed to create root")
-		return
-	}
-	var nodes = []int{20, 15, 10, 9, 25, 21, 11}
-	for _, n := range nodes {
-		node, _ := NewNode(n)
-		tree.Insert(node)
-	}
+	tree := NewBST()
+	tree.InsertAll([]int{20, 15, 10, 9, 25, 21, 11})
 
 	_, ok := tree.Search(10)
 	want := true
