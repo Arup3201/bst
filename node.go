@@ -5,10 +5,10 @@ type Node struct {
 	Parent, Left, Right *Node;
 }
 
-func NewNode(value int) (*Node, error) {
+func NewNode(value int) (*Node) {
 	return &Node {
 		Value: value,
-	}, nil
+	}
 }
 
 func (node *Node)InOrder(p []int) ([]int) {
