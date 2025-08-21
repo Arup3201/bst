@@ -37,15 +37,15 @@ func (tree *BST) Insert(z *Node) (*Node){
 }
 
 func (tree *BST) InOrder(p []int) ([]int) {
-	return inOrderTraversal(tree.Root, p)
+	return tree.Root.InOrder(p)
 }
 
 func (tree *BST) PreOrder(p []int) ([]int) {
-	return preOrderTraversal(tree.Root, p)
+	return tree.Root.PreOrder(p)
 }
 
 func (tree *BST) PostOrder(p []int) ([]int) {
-	return postOrderTraversal(tree.Root, p)
+	return tree.Root.PostOrder(p)
 }
 
 func (tree *BST) Search(t int) (node *Node, ok bool) {
@@ -65,42 +65,5 @@ func (tree *BST) Search(t int) (node *Node, ok bool) {
 	}
 
 	return (*Node)(nil), false
-}
-
-func inOrderTraversal(cn *Node, p []int) ([]int) {
-	if cn==nil {
-		return p
-	}
-
-	p = inOrderTraversal(cn.Left, p)
-	p = append(p, cn.Value)
-	p = inOrderTraversal(cn.Right, p)
-
-	return p
-}
-
-func preOrderTraversal(cn *Node, p []int) ([]int) {
-	if cn==nil {
-		return p
-	}
-
-	p = append(p, cn.Value)
-	p = preOrderTraversal(cn.Left, p)
-	p = preOrderTraversal(cn.Right, p)
-
-	return p
-}
-
-
-func postOrderTraversal(cn *Node, p []int) ([]int) {
-	if cn==nil {
-		return p
-	}
-
-	p = postOrderTraversal(cn.Left, p)
-	p = postOrderTraversal(cn.Right, p)
-	p = append(p, cn.Value)
-
-	return p
 }
 
