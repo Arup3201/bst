@@ -4,10 +4,10 @@ type BST struct {
 	Root *Node;
 }
 
-func NewBST() (*BST, error) {
+func NewBST() (*BST) {
 	return &BST{
 		Root: nil, 
-	}, nil
+	}
 }
 
 func (tree *BST) Insert(z *Node) (*Node){
@@ -34,6 +34,13 @@ func (tree *BST) Insert(z *Node) (*Node){
 	}
 
 	return z
+}
+
+func (tree *BST) InsertAll(nodeValues []int) {
+	for _, n := range nodeValues {
+		node := NewNode(n)
+		tree.Insert(node)
+	}
 }
 
 func (tree *BST) InOrder(p []int) ([]int) {
