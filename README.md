@@ -1,12 +1,17 @@
 # Binary Search Tree
 
-Representation of the binary search tree:
+BST structure:
 
 ```go
-
+type BST struct {
+	Root *Node;
+}
 ```
 
-Structure of tree nodes:
+BST Node structure:
 ```go
-
+type Node struct {
+	Value int;
+	Parent, Left, Right *Node;
+}
 ```
