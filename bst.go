@@ -1,23 +1,23 @@
 package bst
 
 type BST struct {
-	Root *Node;
+	Root *Node
 }
 
-func NewBST() (*BST) {
+func NewBST() *BST {
 	return &BST{
-		Root: nil, 
+		Root: nil,
 	}
 }
 
-func (tree *BST) Insert(z *Node) (*Node){
+func (tree *BST) Insert(z *Node) *Node {
 	y := (*Node)(nil)
 	x := tree.Root
 
 	for x != nil {
 		y = x
 
-		if z.Value>x.Value {
+		if z.Value > x.Value {
 			x = x.Right
 		} else {
 			x = x.Left
@@ -43,15 +43,47 @@ func (tree *BST) InsertAll(nodeValues []int) {
 	}
 }
 
-func (tree *BST) InOrder(p []int) ([]int) {
+func (tree *BST) ShiftTree(u, v *Node) {
+	if u.Parent == nil {
+		tree.Root = v
+	} else if u == u.Parent.Left {
+		u.Parent.Left = v
+	} else {
+		u.Parent.Right = v
+	}
+
+	if v != nil {
+		v.Parent = u
+	}
+}
+
+func (tree *BST) Delete(z *Node) {
+	if z.Left == nil {
+		tree.ShiftTree(z, z.Right)
+	} else if z.Right == nil {
+		tree.ShiftTree(z, z.Left)
+	} else {
+		y, _ := z.Successor() // it is not a leaf node, so it will definitely have a successor
+		if y.Parent != z {
+			tree.ShiftTree(y, y.Right)
+			y.Right = z.Right
+			z.Right = y
+		}
+		tree.ShiftTree(z, y)
+		y.Left = z.Left
+		y.Left.Parent = y
+	}
+}
+
+func (tree *BST) InOrder(p []int) []int {
 	return tree.Root.InOrder(p)
 }
 
-func (tree *BST) PreOrder(p []int) ([]int) {
+func (tree *BST) PreOrder(p []int) []int {
 	return tree.Root.PreOrder(p)
 }
 
-func (tree *BST) PostOrder(p []int) ([]int) {
+func (tree *BST) PostOrder(p []int) []int {
 	return tree.Root.PostOrder(p)
 }
 
@@ -73,4 +105,3 @@ func (tree *BST) Search(t int) (node *Node, ok bool) {
 
 	return (*Node)(nil), false
 }
-
