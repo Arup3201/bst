@@ -43,7 +43,6 @@ func TestBSTPostOrder(t *testing.T) {
 	}
 }
 
-
 func TestBSTSearch(t *testing.T) {
 	tree := NewBST()
 	tree.InsertAll([]int{20, 15, 10, 9, 25, 21, 11})
@@ -51,6 +50,21 @@ func TestBSTSearch(t *testing.T) {
 	_, ok := tree.Search(10)
 	want := true
 	if ok != want {
-		t.Errorf("tree.Search()=_, %t, wanted %t", ok, want)
+		t.Errorf("tree.Search(10)=%t, wanted %t", ok, want)
+	}
+}
+
+func TestBSTDelete(t *testing.T) {
+	tree := NewBST()
+	tree.InsertAll([]int{20, 15, 10, 9, 25, 21, 11})
+	node, _ := tree.Search(10)
+	
+	tree.Delete(node)
+
+	got := []int{}
+	want := []int{9, 11, 15, 20, 21, 25}
+	got = tree.InOrder(got);
+	if !slices.Equal(got, want) {
+		t.Errorf("tree.Delete(10)=%v, expected %v", got, want)
 	}
 }
